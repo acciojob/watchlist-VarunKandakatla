@@ -8,55 +8,59 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class MovieService {
     @Autowired
     MovieRepository repo;
 
-    public ResponseEntity addMovie( Movie movie){
+    public void addMovie( Movie movie){
         repo.addMovie(movie);
-        return new ResponseEntity<>("success", HttpStatus.CREATED);
+
     }
 
-    public ResponseEntity addDirector( Director dir){
+    public void addDirector( Director dir){
         repo.addDirector(dir);
-        return new ResponseEntity<>("success",HttpStatus.CREATED);
+
     }
 
-    public ResponseEntity addMovieDirectorPair(String movie,  String director){
+    public void addMovieDirectorPair(String movie,  String director){
 
        repo.addMovieDirectorPair(movie,director);
-        return new ResponseEntity("success",HttpStatus.CREATED);
-    }
-
-    public ResponseEntity getMovieByName(String name){
-
-        return new ResponseEntity(repo.getMovieByName(name),HttpStatus.CREATED);
-    }
-
-    public ResponseEntity getDirectorByName( String name){
-        return new ResponseEntity<>(repo.getDirectorByName( name),HttpStatus.CREATED);
-    }
-
-    public ResponseEntity getMoviesByDirectorName(String name){
-
-       return new ResponseEntity<>(repo.getMoviesByDirectorName(name), HttpStatus.CREATED);
 
     }
 
-    public ResponseEntity findAllMovies(){
-       return new ResponseEntity<>(repo.findAllMovies(),HttpStatus.CREATED);
+    public Movie getMovieByName(String name){
+
+//        return new ResponseEntity(repo.getMovieByName(name),HttpStatus.CREATED);
+        return repo.getMovieByName(name);
     }
 
-    public ResponseEntity deleteDirectorByName(@RequestParam("name") String name){
+    public Director getDirectorByName( String name){
+//        return new ResponseEntity<>(repo.getDirectorByName( name),HttpStatus.CREATED);
+        return repo.getDirectorByName(name);
+    }
+
+    public List<String> getMoviesByDirectorName(String name){
+
+     return repo.getMoviesByDirectorName(name);
+
+    }
+
+    public List<String> findAllMovies(){
+       return repo.findAllMovies();
+    }
+
+    public void deleteDirectorByName(@RequestParam("name") String name){
 
         repo.deleteDirectorByName(name);
-        return new ResponseEntity<>("success",HttpStatus.CREATED);
+
 
     }
 
-    public ResponseEntity deleteAllDirectors(){
+    public void deleteAllDirectors(){
         repo.deleteAllDirectors();
-        return new ResponseEntity<>("success",HttpStatus.CREATED);
+
     }
 }
