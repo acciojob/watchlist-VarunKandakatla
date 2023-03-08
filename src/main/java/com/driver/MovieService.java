@@ -15,18 +15,18 @@ public class MovieService {
 
     public ResponseEntity addMovie( Movie movie){
         repo.addMovie(movie);
-        return new ResponseEntity<>("success", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("success", HttpStatus.CREATED);
     }
 
     public ResponseEntity addDirector( Director dir){
         repo.addDirector(dir);
-        return new ResponseEntity<>("success",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("success",HttpStatus.CREATED);
     }
 
     public ResponseEntity addMovieDirectorPair(String movie,  String director){
 
        repo.addMovieDirectorPair(movie,director);
-        return new ResponseEntity("success",HttpStatus.ACCEPTED);
+        return new ResponseEntity("success",HttpStatus.CREATED);
     }
 
     public ResponseEntity getMovieByName(String name){
@@ -40,7 +40,7 @@ public class MovieService {
 
     public ResponseEntity getMoviesByDirectorName(String name){
 
-       return new ResponseEntity<>(getMoviesByDirectorName(name), HttpStatus.CREATED);
+       return new ResponseEntity<>(repo.getMoviesByDirectorName(name), HttpStatus.CREATED);
 
     }
 
@@ -51,12 +51,12 @@ public class MovieService {
     public ResponseEntity deleteDirectorByName(@RequestParam("name") String name){
 
         repo.deleteDirectorByName(name);
-        return new ResponseEntity<>("success",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("success",HttpStatus.CREATED);
 
     }
 
     public ResponseEntity deleteAllDirectors(){
         repo.deleteAllDirectors();
-        return new ResponseEntity<>("success",HttpStatus.ACCEPTED);
+        return new ResponseEntity<>("success",HttpStatus.CREATED);
     }
 }
